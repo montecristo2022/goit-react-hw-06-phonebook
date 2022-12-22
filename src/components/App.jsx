@@ -1,4 +1,4 @@
-import { addContact } from './redux/contactsListSlice';
+// import { addContact } from './redux/contactsListSlice';
 import { useSelector } from 'react-redux';
 
 export default function App() {
