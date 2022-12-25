@@ -26,26 +26,6 @@ export default function App() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import Input from './Input/Input';
 // import { ContactList } from './ContactList/ContactList';
 // import Filter from './Filter/Filter';

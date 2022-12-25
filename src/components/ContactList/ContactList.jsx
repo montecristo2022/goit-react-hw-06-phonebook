@@ -22,7 +22,7 @@ export const ContactList = () => {
     );
   };
 
-  console.log(filter.length)
+  console.log(filter.length);
 
   return contactsArray.map(({ id, name, number }) => {
     return (
@@ -38,13 +38,7 @@ export const ContactList = () => {
       </p>
     );
   });
-
 };
-
-
-
-
-
 
 // import React from 'react';
 // import styles from '../ContactList/ContactList.module.css';

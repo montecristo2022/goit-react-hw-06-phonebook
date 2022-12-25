@@ -49,9 +49,7 @@ export default function Input() {
           oneArrayContact.name.toLowerCase() === oneContact.name.toLowerCase()
       )
     ) {
-      alert(
-        `контакт с именем ${oneContact.name}уже существует`
-      );
+      alert(`контакт с именем ${oneContact.name}уже существует`);
       return;
     }
 
