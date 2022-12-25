@@ -14,17 +14,19 @@ export const ContactList = () => {
 
   const filter = useSelector(getFilter);
 
-  const visibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
 
-    return contactsArray.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
+
+  const contactsLowerFilter = filter.toLowerCase()
+
+
+  const visibleContacts = contactsArray.filter(contact =>
+    contact.name.toLowerCase().includes(contactsLowerFilter)
+  );
+
 
   console.log(filter.length);
 
-  return contactsArray.map(({ id, name, number }) => {
+  return visibleContacts.map(({ id, name, number }) => {
     return (
       <p key={id}>
         {name}: {number}
