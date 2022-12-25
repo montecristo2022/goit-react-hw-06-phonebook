@@ -1,9 +1,8 @@
-// import { addContact } from './redux/contactsListSlice';
-import { useSelector } from 'react-redux';
+import Input from './Input/Input';
+import { ContactList } from './ContactList/ContactList';
+import Filter from './Filter/Filter';
 
 export default function App() {
-  const mySelector = useSelector(state => state.myListOfContacts);
-  console.log(mySelector);
   return (
     <div
       style={{
@@ -15,15 +14,17 @@ export default function App() {
         color: '#010101',
       }}
     >
-      <div>BLABLABLABLA</div>
+      <div>
+        <h2>Phonebook</h2>
+        <Input />
+
+        <h3>My contacts</h3>
+        <Filter />
+        <ContactList />
+      </div>
     </div>
   );
 }
-
-
-
-
-
 
 
 
@@ -104,12 +105,12 @@ export default function App() {
 //     );
 //   };
 
-//   useEffect(() => {
-//     const contactsLocalStorage = localStorage.getItem('contacts');
-//     const parsedContacts = JSON.parse(contactsLocalStorage);
+//   // useEffect(() => {
+//   //   const contactsLocalStorage = localStorage.getItem('contacts');
+//   //   const parsedContacts = JSON.parse(contactsLocalStorage);
 
-//     console.log(parsedContacts);
-//   });
+//   //   console.log(parsedContacts);
+//   // });
 
 //   useEffect(() => {
 //     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -133,6 +134,42 @@ export default function App() {
 
 //         <ContactList data={visibleContacts()} deleteContact={deleteContact} />
 //       </div>
+//     </div>
+//   );
+// }
+
+// // import { addContact } from './redux/contactsListSlice';
+// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import { addContact } from './redux/contactsListSlice';
+// import { nanoid } from 'nanoid';
+
+// export default function App() {
+//   const dispatch = useDispatch();
+//   const handleSubmit = (e) => {
+//     e.preventDefault()
+//     const form = e.currentTarget;
+
+//    dispatch(addContact(form.elements.name.value))
+//     }
+
+//   const mySelector = useSelector(state => state.myListOfContacts.myContacts);
+//   return (
+//     <div>
+//       <h2>Телефонная книга</h2>
+//       <div>
+//         {mySelector.map(oneContact => {
+//           return (
+//             <p key={oneContact.id}>
+//               {oneContact.name} {oneContact.number}
+//             </p>
+//           );
+//         })}
+//       </div>
+//       <form onSubmit={handleSubmit}>
+//         <input type="text" name="name"/>
+//         <button type='submit'>Добавить контакт</button>
+//       </form>
 //     </div>
 //   );
 // }

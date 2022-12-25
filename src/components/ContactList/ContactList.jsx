@@ -1,3 +1,51 @@
+import React from 'react';
+import styles from '../ContactList/ContactList.module.css';
+import { getContacts } from 'redux/contactsListSlice';
+import { useSelector } from 'react-redux';
+import { deleteContact } from 'redux/contactsListSlice';
+import { useDispatch } from 'react-redux';
+import { filterContact } from 'redux/contactsFilterSlice';
+import { getFilter } from 'redux/contactsFilterSlice';
+
+export const ContactList = () => {
+  const contactsArray = useSelector(getContacts).myContacts;
+
+  const dispatch = useDispatch();
+
+  const filter = useSelector(getFilter);
+
+  const visibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+
+    return contactsArray.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  console.log(filter.length)
+
+  return contactsArray.map(({ id, name, number }) => {
+    return (
+      <p key={id}>
+        {name}: {number}
+        <button
+          onClick={() => {
+            dispatch(deleteContact(id));
+          }}
+        >
+          delete
+        </button>
+      </p>
+    );
+  });
+
+};
+
+
+
+
+
+
 // import React from 'react';
 // import styles from '../ContactList/ContactList.module.css';
 // import PropTypes from 'prop-types';

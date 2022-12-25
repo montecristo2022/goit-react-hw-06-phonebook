@@ -1,24 +1,28 @@
-// import React from 'react';
-// import styles from '../Filter/Filter.module.css';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import { useState } from 'react';
+import styles from '../Filter/Filter.module.css';
+// import { filterContacts } from 'redux/contactsListSlice';
+import { filterContact } from 'redux/contactsFilterSlice';
+import { useDispatch } from 'react-redux';
 
-// const Filter = ({ value, onChange }) => {
-//   return (
-//     <label className={styles.labelText}>
-//       Поиск по имени{' '}
-//       <input
-//         className={styles.inputFilter}
-//         type="text"
-//         value={value}
-//         onChange={onChange}
-//       />
-//     </label>
-//   );
-// };
+const Filter = () => {
+  const dispatch = useDispatch();
+  const [inputValue, setiIputValue] = useState('');
+  const handleChange = e => {
+    setiIputValue(e.target.value);
+    dispatch(filterContact(e.target.value));
+  };
 
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
+  return (
+    <label className={styles.labelText}>
+      <input
+        className={styles.inputFilter}
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+      />
+    </label>
+  );
+};
 
-// export default Filter;
+export default Filter;

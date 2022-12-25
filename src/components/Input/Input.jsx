@@ -1,206 +1,114 @@
+import styles from '../Input/Input.module.css';
+import React, { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsListSlice';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/contactsListSlice';
 
-// import styles from '../Input/Input.module.css';
+export default function Input() {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contactsArray = useSelector(getContacts).myContacts;
 
-// import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+  const handleChange = event => {
+    let eventName = event.target.name;
+    let eventValue = event.target.value;
 
-// export default function Input({ onSubmit, test }) {
-//   const [name, setName] = useState('');
-//   const [number, setNumber] = useState('');
+    if (eventName === 'name') {
+      setName(eventValue);
+    }
 
-//   const handleChange = event => {
-//     // console.log(event.target.value)
+    if (eventName === 'number') {
+      setNumber(eventValue);
+    }
+  };
 
-//     let eventName = event.target.name;
-//     let eventValue = event.target.value;
+  const handleSubmit = event => {
+    event.preventDefault();
+    let name = event.target.name.value;
+    let number = event.target.number.value;
 
-//     if (eventName === 'name') {
-//       setName(eventValue);
-//     }
+    addContactToArray({ name, number });
+  };
 
-//     if (eventName === 'number') {
-//       setNumber(eventValue);
-//     }
-//   };
+  const addContactToArray = ({ name, number }) => {
+    const oneContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    areTheseNumbersSame(oneContact);
+  };
 
-//   const handleSubmit = event => {
-//     event.preventDefault();
+  const areTheseNumbersSame = oneContact => {
+    if (
+      contactsArray.find(
+        oneArrayContact =>
+          oneArrayContact.name.toLowerCase() === oneContact.name.toLowerCase()
+      )
+    ) {
+      alert(
+        `контакт с именем ${oneContact.name}уже существует`
+      );
+      return;
+    }
 
-//     onSubmit({name: name, number: number});
+    if (
+      contactsArray.find(
+        oneArrayContact => oneArrayContact.number === oneContact.number
+      )
+    ) {
+      alert(`контакт с номером ${oneContact.number} уже существует`);
+      return;
+    }
 
-  
+    dispatch(addContact(oneContact));
+    reset();
+  };
 
-//      checkTest();
-//   };
+  const reset = () => {
+    setName('');
+    setNumber('');
+  };
 
-//   const  checkTest = () => {
-//     let countTest = 0;
-//     // eslint-disable-next-line array-callback-return
-//     test.map(test => {
-//       if (name === test.name) {
-//         countTest += 1;
-//       }
-//     });
-//     if (countTest === 0) {
-//        reset();
-//     }
-//   };
+  return (
+    <div>
+      <h2 className={styles.mainText}>Телефонная книга</h2>
+      <form className={styles.formWrapper} onSubmit={handleSubmit}>
+        <label>
+          <p className={styles.text}> Имя </p>
+          <input
+            className={styles.input}
+            name="name"
+            type="text"
+            value={name}
+            onChange={handleChange}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          ></input>
 
-//   const reset = () => {
-//     setName('');
-//      setNumber('');
-//   };
+          <p className={styles.text}> Номер </p>
+          <input
+            className={styles.input}
+            name="number"
+            type="tel"
+            value={number}
+            onChange={handleChange}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          ></input>
+        </label>
 
-//   return (
-//     <div>
-//       <h2 className={styles.mainText}>Телефонная книга</h2>
-//       <form className={styles.formWrapper} onSubmit={handleSubmit}>
-//         <label>
-//           <p className={styles.text}> Имя </p>
-//           <input
-//             className={styles.input}
-//             name="name"
-//             type="text"
-//             value={name}
-//             onChange={handleChange}
-//             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//             required
-//           ></input>
-
-//           <p className={styles.text}> Номер </p>
-//           <input
-//             className={styles.input}
-//             name="number"
-//             type="tel"
-//             value={number}
-//             onChange={handleChange}
-//             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//             required
-//           ></input>
-//         </label>
-
-//         <div>
-//           <button className={styles.button} type="submit">
-//             Добавить контакт
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// }
-
-// Input.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import styles from '../Input/Input.module.css';
-
-// import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-
-// export default class Input extends Component {
-//   state = {
-//     name: '',
-//     number: '',
-//   };
-
-//   handleChange = event => {
-//     this.setState({
-//       [event.target.name]: event.target.value,
-//     });
-//   };
-
-//   handleSubmit = event => {
-//     event.preventDefault();
-//     // console.log(this.state)
-
-//     this.props.onSubmit(this.state);
-
-//     this.checkTest();
-//   };
-
-//   checkTest = () => {
-//     let countTest = 0;
-//     const tests = this.props.test;
-//     // eslint-disable-next-line array-callback-return
-//     tests.map(test => {
-//       if (this.state.name === test.name) {
-//         countTest += 1;
-//       }
-//     });
-//     if (countTest === 0) {
-//       this.reset();
-//     }
-//   };
-
-//   reset = () => {
-//     this.setState({ name: '', number: '' });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <h2 className={styles.mainText}>Телефонная книга</h2>
-//         <form className={styles.formWrapper} onSubmit={this.handleSubmit}>
-//           <label>
-//             <p className={styles.text}> Имя </p>
-//             <input
-//               className={styles.input}
-//               name="name"
-//               type="text"
-//               value={this.state.name}
-//               onChange={this.handleChange}
-//               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//               required
-//             ></input>
-
-//             <p className={styles.text}> Номер </p>
-//             <input
-//               className={styles.input}
-//               name="number"
-//               type="tel"
-//               value={this.state.number}
-//               onChange={this.handleChange}
-//               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//               required
-//             ></input>
-//           </label>
-
-//           <div>
-//             <button className={styles.button} type="submit">
-//               Добавить контакт
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
-
-// Input.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+        <div>
+          <button className={styles.button} type="submit">
+            Добавить контакт
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
