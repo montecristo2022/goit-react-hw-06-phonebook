@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { contactsFilterSlice } from './contactsFilterSlice';
 import { contactReducer } from './contactsListSlice';
+import { numberFilterSlice } from './numberFilterSlice';
+// import { filterReducerPersist } from './contactsFilterSlice';
 
 import {
   persistStore,
@@ -19,11 +21,25 @@ const persistConfig = {
   storage,
 };
 
+// const myConfig = {
+//   key: 'root',
+//   storage,
+// }
+// почему не работает?
+
 const persistedReducer = persistReducer(persistConfig, contactReducer);
+
+// const persistedFilter = persistReducer(myConfig, filterReducerPersist);
+// почему не работает?
 
 export const store = configureStore({
   reducer: {
+    filterNumber: numberFilterSlice.reducer,
     filter: contactsFilterSlice.reducer,
+
+    // filter: persistedFilter,
+    // почему не работает?
+
     myListOfContacts: persistedReducer,
   },
   middleware(getDefaultMiddleware) {
@@ -37,45 +53,3 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { configureStore } from "@reduxjs/toolkit"
-// import { contactsFilterSlice } from "./contactsFilterSlice"
-// import { contactReducer } from "./contactsListSlice"
-
-// import { persistStore, persistReducer } from "redux-persist"
-// import storage from "redux-persist/lib/storage"
-
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// };
-
-// const persistedReducer = persistReducer(persistConfig, contactReducer)
-
-// export const store = configureStore({
-// reducer: {
-//         filter: contactsFilterSlice.reducer,
-//         // myListOfContacts: contactReducer,
-//         myListOfContacts: persistedReducer,
-//       },
-
-// })
-
-// export const persistor = persistStore(store)

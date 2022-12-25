@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { contactListSlice } from './contactsListSlice';
 
 export const contactsFilterSlice = createSlice({
   name: 'filter',
@@ -9,6 +10,9 @@ export const contactsFilterSlice = createSlice({
     },
   },
 });
+
+// export const filterReducerPersist = contactListSlice.reducer
+// почему не работает?
 
 export const { filterContact } = contactsFilterSlice.actions;
 

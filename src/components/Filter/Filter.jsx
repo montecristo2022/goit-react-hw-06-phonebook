@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from '../Filter/Filter.module.css';
-// import { filterContacts } from 'redux/contactsListSlice';
 import { filterContact } from 'redux/contactsFilterSlice';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +19,7 @@ const Filter = () => {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        placeholder="Diego Costa"
+        placeholder="name or number"
       />
     </label>
   );
