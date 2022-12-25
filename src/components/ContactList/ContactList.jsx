@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactsListSlice';
 import { useDispatch } from 'react-redux';
 import { getFilter } from 'redux/contactsFilterSlice';
-import { getNumber } from 'redux/numberFilterSlice';
+// import { getNumber } from 'redux/numberFilterSlice';
 
 export const ContactList = () => {
   const contactsArray = useSelector(getContacts).myContacts;
@@ -20,10 +20,10 @@ export const ContactList = () => {
     contact.name.toLowerCase().includes(contactsLowerFilter)
   );
 
-  const numberFilter = useSelector(getNumber);
-  const visibleContactsByNumber = contactsArray.filter(contact =>
-    contact.number.includes(numberFilter)
-  );
+  // const numberFilter = useSelector(getNumber);
+  // const visibleContactsByNumber = contactsArray.filter(contact =>
+  //   contact.number.includes(numberFilter)
+  // );
 
   return (
     <ul className={styles.contactsWrapper}>
@@ -47,7 +47,7 @@ export const ContactList = () => {
         );
       })}
 
-      {visibleContacts.length === 0 && visibleContactsByNumber.length > 0
+      {/* {visibleContacts.length === 0 && visibleContactsByNumber.length > 0
         ? visibleContactsByNumber.map(({ id, name, number }) => {
             return (
               <li className={styles.oneContact} key={id}>
@@ -73,7 +73,7 @@ export const ContactList = () => {
         <p>There are no contacts here</p>
       ) : (
         false
-      )}
+      )} */}
     </ul>
   );
 };
