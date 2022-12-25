@@ -20,6 +20,7 @@ const Filter = () => {
         type="text"
         value={inputValue}
         onChange={handleChange}
+        placeholder="Diego Costa"
       />
     </label>
   );
