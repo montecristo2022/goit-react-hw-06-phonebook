@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { contactListSlice } from './contactsListSlice';
+// import { contactListSlice } from './contactsListSlice';
 
 export const contactsFilterSlice = createSlice({
   name: 'filter',
